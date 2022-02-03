@@ -6,14 +6,14 @@ import 'package:ecom_app/widgets/small_text.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
-class ProductCardSlider extends StatefulWidget {
-  const ProductCardSlider({Key? key}) : super(key: key);
+class FoodBody extends StatefulWidget {
+  const FoodBody({Key? key}) : super(key: key);
 
   @override
-  _ProductCardSliderState createState() => _ProductCardSliderState();
+  _FoodBodyState createState() => _FoodBodyState();
 }
 
-class _ProductCardSliderState extends State<ProductCardSlider> {
+class _FoodBodyState extends State<FoodBody> {
   PageController pageController = PageController(viewportFraction: 0.89);
   var _currentPageValue = 0.0;
   double _scaleFactor = 0.8;
@@ -109,9 +109,7 @@ class _ProductCardSliderState extends State<ProductCardSlider> {
                       color: Colors.red,
                     ),
                   ),
-
                   // for texts
-
                   Expanded(
                     child: Container(
                       height: Dimensions.listViewImageHeightSize,
@@ -135,18 +133,13 @@ class _ProductCardSliderState extends State<ProductCardSlider> {
                             CustomSmallText(text: "Masala Dosha with Curry "),
                             SizedBox(height: Dimensions.height10),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                CustomIconAndTextWidget(
-                                  iconColor: Colors.blue,
-                                  icon: IconlyLight.moreCircle,
-                                  text: "Normal",
-                                ),
                                 CustomIconAndTextWidget(
                                   iconColor: Colors.red,
                                   icon: IconlyLight.location,
                                   text: "1.7Kms",
                                 ),
+                                SizedBox(width: Dimensions.width20),
                                 CustomIconAndTextWidget(
                                   iconColor: Colors.green,
                                   icon: IconlyLight.timeCircle,

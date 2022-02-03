@@ -42,10 +42,19 @@ class Dimensions {
 
   //for icon size
 
+  static double iconSize16 = screenHeight / 47.5;
   static double iconSize24 = screenHeight / 31.66;
 
   // for listview image width
 
   static double listViewImageWidthSize = screenWidth / 3.0;
   static double listViewImageHeightSize = screenWidth / 3.6;
+
+  //popular food detail screen
+
+  static double popularFoodImageHeight = screenHeight / 2.17;
+
+  // bottom height
+
+  static double bottomHeightBar = screenHeight / 6.33;
 }

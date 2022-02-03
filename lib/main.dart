@@ -1,4 +1,4 @@
-import 'package:ecom_app/screens/Home/main_food.screen.dart';
+import 'package:ecom_app/screens/Food/food_detail.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Ecom',
       debugShowCheckedModeBanner: false,
-      home: MainFoodScreen(),
+      home: PopularFoodDetailScreen(),
     );
   }
 }

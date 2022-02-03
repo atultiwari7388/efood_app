@@ -21,7 +21,7 @@ class CustomSmallText extends StatelessWidget {
     return Text(
       text,
       overflow: overflow,
-      maxLines: 1,
+      maxLines: 10,
       style: TextStyle(
         color: color,
         fontSize: fontSize == 0 ? Dimensions.font12 : fontSize,

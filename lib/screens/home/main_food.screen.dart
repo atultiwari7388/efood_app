@@ -1,4 +1,4 @@
-import 'package:ecom_app/screens/home/card_slider.screen.dart';
+import 'package:ecom_app/screens/home/food_body.dart';
 import 'package:ecom_app/utils/dimensions.utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -11,6 +11,42 @@ class MainFoodScreen extends StatefulWidget {
 }
 
 class _MainFoodScreenState extends State<MainFoodScreen> {
+  ScrollController _scrollController = ScrollController();
+  bool _showBackToTopButton = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController()
+      ..addListener(
+        () {
+          setState(
+            () {
+              if (_scrollController.offset >= 400) {
+                _showBackToTopButton = true; // show the back-to-top button
+              } else {
+                _showBackToTopButton = false; // hide the back-to-top button
+              }
+            },
+          );
+        },
+      );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: Duration(seconds: 2),
+      curve: Curves.bounceIn,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     print(MediaQuery.of(context).size.height.toString());
@@ -24,12 +60,20 @@ class _MainFoodScreenState extends State<MainFoodScreen> {
             // card Slider
             Expanded(
               child: SingleChildScrollView(
-                child: ProductCardSlider(),
+                controller: _scrollController,
+                child: FoodBody(),
               ),
             ),
           ],
         ),
       ),
+      floatingActionButton: _showBackToTopButton == false
+          ? null
+          : FloatingActionButton(
+              backgroundColor: Colors.green,
+              onPressed: _scrollToTop,
+              child: Icon(IconlyBold.arrowUp),
+            ),
     );
   }
 }
