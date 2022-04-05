@@ -40,6 +40,8 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
           : Column(
               children: [
                 CustomSmallText(
+                  height: 1.3,
+                  fontSize: Dimensions.font17,
                   text: hiddenText
                       ? (firstHalf + "....")
                       : (firstHalf + secondHalf),
