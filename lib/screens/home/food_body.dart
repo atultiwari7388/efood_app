@@ -106,6 +106,11 @@ class _FoodBodyState extends State<FoodBody> {
                     width: Dimensions.listViewImageWidthSize,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Dimensions.radius20),
+                      image: DecorationImage(
+                        image: NetworkImage(
+                            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.rasoirani.com%2Fwp-content%2Fuploads%2F2020%2F04%2Fmasala-dosa.jpg&f=1&nofb=1"),
+                        fit: BoxFit.cover,
+                      ),
                       color: Colors.red,
                     ),
                   ),

@@ -7,12 +7,10 @@ class CustomSmallText extends StatelessWidget {
     this.color = const Color(0xFF332d2b),
     required this.text,
     this.fontSize = 0,
-    this.overflow = TextOverflow.ellipsis,
     this.height = 1.2,
   }) : super(key: key);
   final Color color;
   final String text;
-  final TextOverflow overflow;
   final double fontSize;
   final double height;
 
@@ -20,9 +18,8 @@ class CustomSmallText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      overflow: overflow,
-      maxLines: 10,
       style: TextStyle(
+        height: height,
         color: color,
         fontSize: fontSize == 0 ? Dimensions.font12 : fontSize,
       ),

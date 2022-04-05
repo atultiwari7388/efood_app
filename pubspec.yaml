@@ -24,6 +24,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   dots_indicator: ^2.0.0
   get: ^4.6.1
+  flutter_local_notifications: ^9.2.0
   flutter:
     sdk: flutter
   flutter_iconly: ^1.0.2
