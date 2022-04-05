@@ -1,4 +1,5 @@
 import 'package:ecom_app/controllers/popular_product_controller.dart';
+import 'package:ecom_app/controllers/recommended_product.controller.dart';
 import 'package:ecom_app/screens/home/main_food.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.find<PopularProductController>().getPopularProductList();
+    Get.find<RecommendedProductController>().getRecommendedProductList();
     return GetMaterialApp(
       title: 'Ecom',
       debugShowCheckedModeBanner: false,

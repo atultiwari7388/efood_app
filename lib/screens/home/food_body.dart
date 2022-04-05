@@ -1,5 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:ecom_app/controllers/popular_product_controller.dart';
+import 'package:ecom_app/controllers/recommended_product.controller.dart';
 import 'package:ecom_app/utils/app_constants.dart';
 import 'package:ecom_app/utils/dimensions.utils.dart';
 import 'package:ecom_app/widgets/icon_and_text.widget.dart';
@@ -112,81 +113,102 @@ class _FoodBodyState extends State<FoodBody> {
         ),
         // list of food items
 
-        ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: 10,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              margin: EdgeInsets.only(
-                left: Dimensions.width20,
-                right: Dimensions.width20,
-                bottom: Dimensions.height10,
-              ),
-              child: Row(
-                children: [
-                  //for image
-                  Container(
-                    height: Dimensions.listViewImageWidthSize,
-                    width: Dimensions.listViewImageWidthSize,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.radius20),
-                      image: DecorationImage(
-                        image: NetworkImage(
-                            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.rasoirani.com%2Fwp-content%2Fuploads%2F2020%2F04%2Fmasala-dosa.jpg&f=1&nofb=1"),
-                        fit: BoxFit.cover,
-                      ),
-                      color: Colors.red,
-                    ),
-                  ),
-                  // for texts
-                  Expanded(
-                    child: Container(
-                      height: Dimensions.listViewImageHeightSize,
-                      decoration: BoxDecoration(
-                        color: Colors.white54,
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(Dimensions.radius20),
-                          bottomRight: Radius.circular(Dimensions.radius20),
+        GetBuilder<RecommendedProductController>(
+          builder: (recommendedProductController) {
+            return recommendedProductController.isProductLoaded
+                ? ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: recommendedProductController
+                        .recommendedProductList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      var data = recommendedProductController
+                          .recommendedProductList[index];
+
+                      return Container(
+                        margin: EdgeInsets.only(
+                          left: Dimensions.width20,
+                          right: Dimensions.width20,
+                          bottom: Dimensions.height10,
                         ),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          left: Dimensions.width10,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        child: Row(
                           children: [
-                            CustomLargeText(text: "Masala Dosha with Curry "),
-                            SizedBox(height: Dimensions.height10),
-                            CustomSmallText(text: "Masala Dosha with Curry "),
-                            SizedBox(height: Dimensions.height10),
-                            Row(
-                              children: [
-                                CustomIconAndTextWidget(
-                                  iconColor: Colors.red,
-                                  icon: IconlyLight.location,
-                                  text: "1.7Kms",
+                            //for image
+                            Container(
+                              height: Dimensions.listViewImageWidthSize,
+                              width: Dimensions.listViewImageWidthSize,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.radius20),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    AppConstants.BASE_URL +
+                                        "/uploads/" +
+                                        data.img!,
+                                  ),
+                                  fit: BoxFit.cover,
                                 ),
-                                SizedBox(width: Dimensions.width20),
-                                CustomIconAndTextWidget(
-                                  iconColor: Colors.green,
-                                  icon: IconlyLight.timeCircle,
-                                  text: "32min",
+                                color: index.isEven
+                                    ? Color(0xff69c5df)
+                                    : Color(0xff9294cc),
+                              ),
+                            ),
+                            // for texts
+                            Expanded(
+                              child: Container(
+                                height: Dimensions.listViewImageHeightSize,
+                                decoration: BoxDecoration(
+                                  color: Colors.white54,
+                                  borderRadius: BorderRadius.only(
+                                    topRight:
+                                        Radius.circular(Dimensions.radius20),
+                                    bottomRight:
+                                        Radius.circular(Dimensions.radius20),
+                                  ),
                                 ),
-                              ],
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    left: Dimensions.width10,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      CustomLargeText(text: data.name!),
+                                      SizedBox(height: Dimensions.height10),
+                                      CustomSmallText(text: data.name!),
+                                      SizedBox(height: Dimensions.height10),
+                                      Row(
+                                        children: [
+                                          CustomIconAndTextWidget(
+                                            iconColor: Colors.red,
+                                            icon: IconlyLight.location,
+                                            text: "1.7Kms",
+                                          ),
+                                          SizedBox(width: Dimensions.width20),
+                                          CustomIconAndTextWidget(
+                                            iconColor: Colors.green,
+                                            icon: IconlyLight.timeCircle,
+                                            text: "32min",
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
+                      );
+                    },
+                  )
+                : Center(
+                    child: CircularProgressIndicator(),
+                  );
           },
-        ),
+        )
       ],
     );
   }
