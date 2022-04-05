@@ -1,7 +1,7 @@
 import 'package:ecom_app/controllers/popular_product_controller.dart';
+import 'package:ecom_app/screens/home/main_food.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'screens/Food/recommended_details.screen.dart';
 import "helper/dependencies.helper.dart" as dep;
 
 Future<void> main() async {
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Ecom',
       debugShowCheckedModeBanner: false,
-      home: RecommendedProductDetailScreen(),
+      home: MainFoodScreen(),
     );
   }
 }
