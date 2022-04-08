@@ -5,6 +5,7 @@ import 'package:ecom_app/widgets/expandable_text.widget.dart';
 import 'package:ecom_app/widgets/large_text.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:get/get.dart';
 
 class RecommendedProductDetailScreen extends StatelessWidget {
   const RecommendedProductDetailScreen({Key? key}) : super(key: key);
@@ -131,6 +132,7 @@ class TopComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      automaticallyImplyLeading: false,
       pinned: true,
       expandedHeight: Dimensions.height300,
       backgroundColor: Colors.green,
@@ -139,7 +141,12 @@ class TopComponent extends StatelessWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          AppIcon(icon: IconlyLight.closeSquare),
+          GestureDetector(
+            onTap: () {
+              Get.back();
+            },
+            child: AppIcon(icon: Icons.clear),
+          ),
           AppIcon(
             icon: IconlyLight.notification,
             iconColor: Colors.black,

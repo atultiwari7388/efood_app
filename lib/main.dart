@@ -1,6 +1,6 @@
 import 'package:ecom_app/controllers/popular_product_controller.dart';
 import 'package:ecom_app/controllers/recommended_product.controller.dart';
-import 'package:ecom_app/screens/home/main_food.screen.dart';
+import 'package:ecom_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import "helper/dependencies.helper.dart" as dep;
@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Ecom',
       debugShowCheckedModeBanner: false,
-      home: MainFoodScreen(),
+      initialRoute: AppRoutes.getHomeRoute(),
+      getPages: AppRoutes.routes,
     );
   }
 }
