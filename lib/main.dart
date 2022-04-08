@@ -1,7 +1,8 @@
 import 'package:ecom_app/controllers/popular_product_controller.dart';
+import 'package:ecom_app/controllers/recommended_product.controller.dart';
+import 'package:ecom_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'screens/Food/recommended_details.screen.dart';
 import "helper/dependencies.helper.dart" as dep;
 
 Future<void> main() async {
@@ -17,10 +18,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.find<PopularProductController>().getPopularProductList();
+    Get.find<RecommendedProductController>().getRecommendedProductList();
     return GetMaterialApp(
       title: 'Ecom',
       debugShowCheckedModeBanner: false,
-      home: RecommendedProductDetailScreen(),
+      initialRoute: AppRoutes.getHomeRoute(),
+      getPages: AppRoutes.routes,
     );
   }
 }
