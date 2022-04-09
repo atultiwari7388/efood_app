@@ -9,11 +9,12 @@ class AppRoutes {
   static const String recommendedFoodDetailPage =
       "/recommended-food-details-page";
 
-//create a function to pass parametes to the screen
+//create functions to pass parametes to the screen
   static String getHomeRoute() => "$home";
   static String getPopularFoodDetailPage(int pageId) =>
       "$popularFoodDetailPage?pageId=$pageId";
-  static String getRecommendedFoodDetailPage() => "$recommendedFoodDetailPage";
+  static String getRecommendedFoodDetailPage(int pageId) =>
+      "$recommendedFoodDetailPage?pageId=$pageId";
 
   static List<GetPage> routes = [
     GetPage(
@@ -34,7 +35,9 @@ class AppRoutes {
     GetPage(
       name: recommendedFoodDetailPage,
       page: () {
-        return RecommendedProductDetailScreen();
+        var pageId = Get.parameters['pageId'];
+
+        return RecommendedProductDetailScreen(pageId: int.parse(pageId!));
       },
       transition: Transition.fadeIn,
     ),

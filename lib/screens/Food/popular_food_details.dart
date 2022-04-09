@@ -7,6 +7,7 @@ import 'package:ecom_app/widgets/expandable_text.widget.dart';
 import 'package:ecom_app/widgets/icon_and_text.widget.dart';
 import 'package:ecom_app/widgets/large_text.widget.dart';
 import 'package:ecom_app/widgets/small_text.widget.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:get/get.dart';
@@ -17,12 +18,15 @@ class PopularFoodDetailScreen extends StatelessWidget {
     required this.pageId,
   }) : super(key: key);
 
-  final pageId;
+  final int pageId;
 
   @override
   Widget build(BuildContext context) {
     var popularProductData =
         Get.find<PopularProductController>().popularProductList[pageId];
+
+    //checking new product item is 0 or not
+    Get.find<PopularProductController>().initProduct();
 
     // print("page id is " + pageId.toString());
     // print("product name is " + popularProductData.name!);
@@ -152,65 +156,89 @@ class PopularFoodDetailScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: Container(
-        height: Dimensions.bottomHeightBar,
-        padding: EdgeInsets.only(
-          top: Dimensions.height30,
-          bottom: Dimensions.height30,
-          left: Dimensions.width20,
-          right: Dimensions.width20,
-        ),
-        decoration: BoxDecoration(
-          color: AppColors.buttonBackgroundColor,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(Dimensions.radius20 * 2),
-            topRight: Radius.circular(Dimensions.radius20 * 2),
-          ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            //add and remove items
-            Container(
-              padding: EdgeInsets.only(
-                top: Dimensions.height20,
-                bottom: Dimensions.height20,
-                left: Dimensions.width20,
-                right: Dimensions.width20,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.radius20),
-                color: Colors.white,
-              ),
-              child: Row(
-                children: [
-                  Icon(Icons.remove, color: AppColors.signColor),
-                  SizedBox(width: Dimensions.width10 / 2),
-                  CustomLargeText(text: "0"),
-                  SizedBox(width: Dimensions.width10 / 2),
-                  Icon(IconlyLight.plus, color: AppColors.signColor),
-                ],
+      bottomNavigationBar: GetBuilder<PopularProductController>(
+        builder: (popularProductController) {
+          return Container(
+            height: Dimensions.bottomHeightBar,
+            padding: EdgeInsets.only(
+              top: Dimensions.height30,
+              bottom: Dimensions.height30,
+              left: Dimensions.width20,
+              right: Dimensions.width20,
+            ),
+            decoration: BoxDecoration(
+              color: AppColors.buttonBackgroundColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(Dimensions.radius20 * 2),
+                topRight: Radius.circular(Dimensions.radius20 * 2),
               ),
             ),
-            // subTotal
-            Container(
-              padding: EdgeInsets.only(
-                top: Dimensions.height20,
-                bottom: Dimensions.height20,
-                left: Dimensions.width20,
-                right: Dimensions.width20,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.radius20),
-                color: Colors.green.withOpacity(0.86),
-              ),
-              child: CustomLargeText(
-                text: "\₹${popularProductData.price} | Add to cart",
-                color: Colors.white,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                //add and remove items
+                Container(
+                  padding: EdgeInsets.only(
+                    top: Dimensions.height20,
+                    bottom: Dimensions.height20,
+                    left: Dimensions.width20,
+                    right: Dimensions.width20,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.radius20),
+                    color: Colors.white,
+                  ),
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          popularProductController.setQuantity(false);
+                        },
+                        child: Icon(EvaIcons.minus, color: AppColors.signColor),
+                      ),
+                      SizedBox(width: Dimensions.width10 / 2),
+                      CustomLargeText(
+                        text: popularProductController.quantity.toString(),
+                      ),
+                      SizedBox(width: Dimensions.width10 / 2),
+                      GestureDetector(
+                        onTap: () {
+                          popularProductController.setQuantity(true);
+                        },
+                        child: Icon(EvaIcons.plus, color: AppColors.signColor),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(width: Dimensions.width10),
+                // subTotal
+                Container(
+                  padding: EdgeInsets.only(
+                    top: Dimensions.height20,
+                    bottom: Dimensions.height20,
+                    left: Dimensions.width20,
+                    right: Dimensions.width20,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.radius20),
+                    color: Colors.green.withOpacity(0.86),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomLargeText(
+                        text: "\₹${popularProductData.price}",
+                        color: Colors.white,
+                      ),
+                      SizedBox(width: Dimensions.width10),
+                      Icon(EvaIcons.shoppingCart, color: Colors.white),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
