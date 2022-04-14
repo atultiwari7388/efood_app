@@ -1,4 +1,5 @@
 import 'package:ecom_app/controllers/recommended_product.controller.dart';
+import 'package:ecom_app/routes/app_routes.dart';
 import 'package:ecom_app/utils/colors.utils.dart';
 import 'package:ecom_app/utils/dimensions.utils.dart';
 import 'package:ecom_app/widgets/custom_top_icon.widget.dart';
@@ -38,7 +39,7 @@ class RecommendedProductDetailScreen extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.back();
+                    Get.toNamed(AppRoutes.home);
                   },
                   child: AppIcon(icon: Icons.clear),
                 ),
