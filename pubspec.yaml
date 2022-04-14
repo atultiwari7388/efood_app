@@ -26,6 +26,8 @@ dependencies:
   get: ^4.6.1
   cached_network_image: ^3.2.0
   getwidget: ^2.0.5
+  eva_icons_flutter: ^3.1.0
+  badges: ^2.0.2
   flutter_local_notifications: ^9.2.0
   flutter:
     sdk: flutter
