@@ -19,9 +19,11 @@ class PopularFoodDetailScreen extends StatelessWidget {
   PopularFoodDetailScreen({
     Key? key,
     required this.pageId,
+    required this.page,
   }) : super(key: key);
 
   final int pageId;
+  final String page;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +70,11 @@ class PopularFoodDetailScreen extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.toNamed(AppRoutes.home);
+                    if (page == "cartpage") {
+                      Get.toNamed(AppRoutes.getCartPage());
+                    } else {
+                      Get.toNamed(AppRoutes.home);
+                    }
                   },
                   child: AppIcon(icon: IconlyLight.arrowLeft),
                 ),
@@ -76,13 +82,23 @@ class PopularFoodDetailScreen extends StatelessWidget {
                     builder: (popularProductController) {
                   return Stack(
                     children: [
-                      AppIcon(icon: IconlyLight.buy),
+                      GestureDetector(
+                        onTap: () {
+                          if (Get.find<PopularProductController>().totalItems >=
+                              1)
+                            Get.toNamed(
+                              AppRoutes.getCartPage(),
+                            );
+                        },
+                        child: AppIcon(icon: IconlyLight.buy),
+                      ),
                       // for badge
-                      Get.find<PopularProductController>().totalItems > 0
+                      Get.find<PopularProductController>().totalItems >= 1
                           ? Positioned(
                               right: 10,
-                              top: 2,
+                              top: 0,
                               child: Badge(
+                                animationType: BadgeAnimationType.scale,
                                 badgeContent: Text(
                                   Get.find<PopularProductController>()
                                       .totalItems
@@ -196,7 +212,7 @@ class PopularFoodDetailScreen extends StatelessWidget {
 
   Widget buildBottomBar(popularProductData) {
     return GetBuilder<PopularProductController>(
-      builder: (popularProductControllerQuantity) {
+      builder: (productControllerQuantity) {
         return Container(
           height: Dimensions.bottomHeightBar,
           padding: EdgeInsets.only(
@@ -231,19 +247,18 @@ class PopularFoodDetailScreen extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        popularProductControllerQuantity.setQuantity(false);
+                        productControllerQuantity.setQuantity(false);
                       },
                       child: Icon(EvaIcons.minus, color: AppColors.signColor),
                     ),
                     SizedBox(width: Dimensions.width10 / 2),
                     CustomLargeText(
-                      text: popularProductControllerQuantity.inCartItems
-                          .toString(),
+                      text: productControllerQuantity.inCartItems.toString(),
                     ),
                     SizedBox(width: Dimensions.width10 / 2),
                     GestureDetector(
                       onTap: () {
-                        popularProductControllerQuantity.setQuantity(true);
+                        productControllerQuantity.setQuantity(true);
                       },
                       child: Icon(EvaIcons.plus, color: AppColors.signColor),
                     ),
@@ -252,22 +267,21 @@ class PopularFoodDetailScreen extends StatelessWidget {
               ),
               SizedBox(width: Dimensions.width10),
               // subTotal
-              Container(
-                padding: EdgeInsets.only(
-                  top: Dimensions.height20,
-                  bottom: Dimensions.height20,
-                  left: Dimensions.width20,
-                  right: Dimensions.width20,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.radius20),
-                  color: Colors.green.withOpacity(0.86),
-                ),
-                child: GestureDetector(
-                  onTap: () {
-                    popularProductControllerQuantity
-                        .addItem(popularProductData);
-                  },
+              GestureDetector(
+                onTap: () {
+                  productControllerQuantity.addItem(popularProductData);
+                },
+                child: Container(
+                  padding: EdgeInsets.only(
+                    top: Dimensions.height20,
+                    bottom: Dimensions.height20,
+                    left: Dimensions.width20,
+                    right: Dimensions.width20,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.radius20),
+                    color: Colors.green.withOpacity(0.86),
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

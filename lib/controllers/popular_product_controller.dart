@@ -1,5 +1,6 @@
 import 'package:ecom_app/controllers/cart_controller.dart';
 import 'package:ecom_app/data/repository/popular_product.repo.dart';
+import 'package:ecom_app/models/cart.model.dart';
 import 'package:ecom_app/models/popular_product.model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -66,6 +67,10 @@ class PopularProductController extends GetxController {
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
+      if (_inCartItems > 0) {
+        _quantity = -_inCartItems;
+        return _quantity;
+      }
       return 0;
     } else if ((_inCartItems + quantity) > 10) {
       Get.snackbar(
@@ -75,7 +80,7 @@ class PopularProductController extends GetxController {
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
-      return 10;
+      return 0;
     } else {
       return quantity;
     }
@@ -130,5 +135,11 @@ class PopularProductController extends GetxController {
 
   int get totalItems {
     return _cartController.totalItems;
+  }
+
+  //create a function for getting data from cart controller
+
+  List<CartModel> get getCartItems {
+    return _cartController.getCartItems;
   }
 }
