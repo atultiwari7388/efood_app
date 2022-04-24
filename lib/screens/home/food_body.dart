@@ -2,7 +2,6 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:ecom_app/controllers/popular_product_controller.dart';
 import 'package:ecom_app/controllers/recommended_product.controller.dart';
 import 'package:ecom_app/routes/app_routes.dart';
-import 'package:ecom_app/screens/Food/popular_food_details.dart';
 import 'package:ecom_app/utils/app_constants.dart';
 import 'package:ecom_app/utils/dimensions.utils.dart';
 import 'package:ecom_app/widgets/icon_and_text.widget.dart';
@@ -130,7 +129,9 @@ class _FoodBodyState extends State<FoodBody> {
                       return GestureDetector(
                         onTap: () {
                           Get.toNamed(
-                              AppRoutes.getRecommendedFoodDetailPage(index));
+                            AppRoutes.getRecommendedFoodDetailPage(
+                                index, "home"),
+                          );
                         },
                         child: Container(
                           margin: EdgeInsets.only(
@@ -257,7 +258,7 @@ class _FoodBodyState extends State<FoodBody> {
           GestureDetector(
             onTap: () {
               Get.toNamed(
-                AppRoutes.getPopularFoodDetailPage(index),
+                AppRoutes.getPopularFoodDetailPage(index, "home"),
               );
             },
             child: Container(

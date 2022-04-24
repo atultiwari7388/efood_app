@@ -29,6 +29,7 @@ class CartController extends GetxController {
           quantity: value.quantity! + quantity,
           isExist: true,
           time: DateTime.now().toString(),
+          productModel: productModel,
         );
       });
 
@@ -46,6 +47,7 @@ class CartController extends GetxController {
             quantity: quantity,
             isExist: true,
             time: DateTime.now().toString(),
+            productModel: productModel,
           );
         });
       } else {
@@ -58,6 +60,7 @@ class CartController extends GetxController {
         );
       }
     }
+    update();
   }
 
   //create a function to isProductExist
@@ -96,5 +99,22 @@ class CartController extends GetxController {
     });
 
     return totalQuantity;
+  }
+
+  //create getter function, where would be able to get the objects
+  List<CartModel> get getCartItems {
+    return _items.entries.map((e) {
+      return e.value;
+    }).toList();
+  }
+
+  //create subtotal of all items in cart
+  int get totalCartPrice {
+    var total = 0;
+    _items.forEach((key, value) {
+      // total = value.quantity! * value.price!;
+      total += value.quantity! * value.price!;
+    });
+    return total;
   }
 }
