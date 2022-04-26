@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'package:ecom_app/routes/app_routes.dart';
-import 'package:ecom_app/utils/colors.utils.dart';
 import 'package:ecom_app/utils/dimensions.utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

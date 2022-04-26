@@ -95,7 +95,7 @@ class PopularProductController extends GetxController {
     var exists = false;
     exists = _cartController.existInCart(productModel);
 
-    print("exists or not " + exists.toString());
+    // print("exists or not " + exists.toString());
     //conditional check if previous product data saved or not, if it is saved we'll take that data, so fresh data coming from somewhere that has been saved
     // get from storage and set it inCartItems=3
     // if(exits){
@@ -107,7 +107,7 @@ class PopularProductController extends GetxController {
     if (exists) {
       _inCartItems = _cartController.getQuantity(productModel);
     }
-    print("The Quantity in the cart is " + _inCartItems.toString());
+    // print("The Quantity in the cart is " + _inCartItems.toString());
   }
 
   //create new function for adding product to cart
@@ -121,12 +121,12 @@ class PopularProductController extends GetxController {
     _inCartItems = _cartController.getQuantity(productModel);
 
     _cartController.items.forEach((key, value) {
-      print(
-        "The id is" +
-            value.id.toString() +
-            "The quantity is" +
-            value.quantity.toString(),
-      );
+      // print(
+      //   "The id is" +
+      //       value.id.toString() +
+      //       "The quantity is" +
+      //       value.quantity.toString(),
+      // );
     });
     update();
   }

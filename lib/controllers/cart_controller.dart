@@ -12,6 +12,10 @@ class CartController extends GetxController {
   Map<int, CartModel> _items = {};
   Map<int, CartModel> get items => _items;
 
+  //create a list to save data locally
+  //Only for Storage and Shared Preference
+  List<CartModel> storageItems = [];
+
   //create a function
   void addItem(ProductModel productModel, int quantity) {
     //once this method is called we want to save it on this map
@@ -60,6 +64,10 @@ class CartController extends GetxController {
         );
       }
     }
+
+    //call the cartRepo method here
+    cartRepo.addToCartList(getCartItems);
+
     update();
   }
 
@@ -116,5 +124,34 @@ class CartController extends GetxController {
       total += value.quantity! * value.price!;
     });
     return total;
+  }
+
+  //create a new method from getCartData
+
+  List<CartModel> getCartData() {
+    setCart = cartRepo.getCartList();
+    return storageItems;
+  }
+
+  set setCart(List<CartModel> items) {
+    storageItems = items;
+    print("Length of cart items  " + storageItems.length.toString());
+    for (int i = 0; i < storageItems.length; i++) {
+      _items.putIfAbsent(
+          storageItems[i].productModel!.id!, () => storageItems[i]);
+    }
+  }
+
+  //add to history
+  void addToHistory() {
+    cartRepo.addToCartHistoryList();
+
+    //call a method clear
+    clear();
+  }
+
+  void clear() {
+    _items = {};
+    update();
   }
 }
