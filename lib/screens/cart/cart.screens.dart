@@ -171,7 +171,7 @@ class CartPage extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(
                                                       Dimensions.radius20),
-                                              color: Colors.green,
+                                              color: AppColors.mainColor,
                                             ),
                                             child: Row(
                                               mainAxisAlignment:
@@ -293,7 +293,8 @@ class CartPage extends StatelessWidget {
                 // subTotal
                 GestureDetector(
                   onTap: () {
-                    // productControllerQuantity.addItem(popularProductData);
+                    print("Tapped");
+                    cartController.addToHistory();
                   },
                   child: Container(
                     padding: EdgeInsets.only(
@@ -304,7 +305,7 @@ class CartPage extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Dimensions.radius20),
-                      color: Colors.green.withOpacity(0.86),
+                      color: AppColors.mainColor,
                     ),
                     child: CustomLargeText(
                       text: "Check Out",

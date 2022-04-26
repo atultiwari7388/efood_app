@@ -1,11 +1,10 @@
-import 'package:ecom_app/controllers/cart_controller.dart';
 import 'package:ecom_app/data/repository/recommended_product.repo.dart';
 import 'package:ecom_app/models/popular_product.model.dart';
 import 'package:get/get.dart';
 
 class RecommendedProductController extends GetxController {
   final RecommendedProductRepo recommendedProductRepo;
-  late CartController _cartController;
+  // late CartController _cartController;
 
   RecommendedProductController({required this.recommendedProductRepo});
 

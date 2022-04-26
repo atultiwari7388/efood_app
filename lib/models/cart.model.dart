@@ -21,6 +21,7 @@ class CartModel {
     this.productModel,
   });
 
+//!convert json to an object
   CartModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
@@ -30,5 +31,20 @@ class CartModel {
     isExist = json['isExist'];
     time = json['time'];
     productModel = ProductModel.fromJson(json["productModel"]);
+  }
+
+//!convert object to json
+
+  Map<String, dynamic> toJson() {
+    return {
+      "id": this.id,
+      "name": this.name,
+      "price": this.price,
+      "img": this.img,
+      "quantity": this.quantity,
+      "isExist": this.isExist,
+      "time": this.time,
+      "productModel": this.productModel!.toJson(),
+    };
   }
 }
